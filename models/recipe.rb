@@ -7,7 +7,9 @@ class Recipe
     @id = id
     @name = name
     @instructions = instructions
+    @instructions ||= "This recipe doesn't have any instructions."
     @description = description
+    @description ||= "This recipe doesn't have a description."
     @ingredients = ingredients
   end
 
@@ -43,10 +45,6 @@ class Recipe
     ingredients = []
     results.each do |recipe|
       ingredients << Ingredient.new(recipe["ingredients"])
-    end
-
-    if results[0]["description"].nil?
-      results[0]["description"] = "This recipe doesn't have a description."
     end
 
     Recipe.new(results[0]["id"],results[0]["name"],results[0]["instructions"],results[0]["description"],ingredients)
